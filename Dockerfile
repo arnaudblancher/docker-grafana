@@ -1,4 +1,4 @@
-FROM grafana/grafana:4.2.0
+FROM grafana/grafana:4.1.1
 
 RUN apt-get update && apt-get install -y curl
 
@@ -21,12 +21,15 @@ LABEL org.label-schema.vendor="basi" \
     org.label-schema.version=$version \
     org.label-schema.schema-version="1.0" \
     org.label-schema.docker.cmd.devel="" \
-    org.label-schema.docker.params="GF_SECURITY_ADMIN_PASSWORD=Admin user password,\
-PROMETHEUS_ENDPOINT=Prometheus address used to obtain data,\
-ELASTICSEARCH_ENDPOINT=Elasticsearch addres used to get annotations,\
-ELASTICSEARCH_USER=Elasticsearch user,\
-ELASTICSEARCH_PASSWORD=Elasticsearch password" \
+    org.label-schema.docker.params="GF_SECURITY_ADMIN_PASSWORD=admin,\
+PROMETHEUS_ENDPOINT=http://prometheus:9090,\
+ELASTICSEARCH_ENDPOINT=http://elasticsearch:9200,\
+ELASTICSEARCH_USER=readuser,\
+ELASTICSEARCH_PASSWORD=myelasticpass" \
     org.label-schema.build-date=$build_date
+
+ENV "IN=172.18.0.1:4999" \
+    "OUT=4999"
 
 ENV "GF_SECURITY_ADMIN_PASSWORD=admin" \
     "PROMETHEUS_ENDPOINT=http://prometheus:9090" \
@@ -34,8 +37,5 @@ ENV "GF_SECURITY_ADMIN_PASSWORD=admin" \
     "ELASTICSEARCH_USER=readuser" \
     "ELASTICSEARCH_PASSWORD=myelasticpass"
 
-# Add on 
-#RUN mkdir /var/lib/grafana/dashboards && chmod 0755 /var/lib/grafana/dashboards && chown grafana:grafana /var/lib/grafana/dashboards 
-#COPY etc/grafana/grafana.ini /etc/grafana/grafana.ini
-
 ENTRYPOINT ["/init.sh"]
+
