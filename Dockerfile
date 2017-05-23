@@ -1,7 +1,7 @@
 FROM grafana/grafana:4.2.0
 
 RUN apt-get update && apt-get install -y curl
-RUN mkdir /var/lib/grafana/dashboards && chmod 0755 /var/lib/grafana/dashboards && chown grafana:graphana /var/lib/grafana/dashboards 
+RUN mkdir /var/lib/grafana/dashboards && chmod 0755 /var/lib/grafana/dashboards && chown grafana:grafana /var/lib/grafana/dashboards 
 
 ADD rootfs /
 
