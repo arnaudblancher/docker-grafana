@@ -1,7 +1,6 @@
 FROM grafana/grafana:4.2.0
 
 RUN apt-get update && apt-get install -y curl
-RUN mkdir /var/lib/grafana/dashboards && chmod 0755 /var/lib/grafana/dashboards && chown grafana:grafana /var/lib/grafana/dashboards 
 
 ADD rootfs /
 
@@ -36,6 +35,7 @@ ENV "GF_SECURITY_ADMIN_PASSWORD=admin" \
     "ELASTICSEARCH_PASSWORD=myelasticpass"
 
 # Add on 
+RUN mkdir /var/lib/grafana/dashboards && chmod 0755 /var/lib/grafana/dashboards && chown grafana:grafana /var/lib/grafana/dashboards 
 COPY etc/grafana/grafana.ini /etc/grafana/grafana.ini
 
 ENTRYPOINT ["/init.sh"]
