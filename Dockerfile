@@ -11,12 +11,15 @@ ADD rootfs /
 
 
 
-RUN echo '# from docker_grafana\n\
-nameserver 127.0.0.11\n\
-options ndots:0' > /etc/resolv.conf && chmod 0444 /etc/resolv.conf
+#RUN echo '# from docker_grafana\n\
+#nameserver 127.0.0.11\n\
+#options ndots:0' > /etc/resolv.conf && chmod 0444 /etc/resolv.conf
 #CMD echo '# from docker_grafana\n\
 #nameserver 127.0.0.11\n\
 #options ndots:0' > /etc/resolv.conf && chmod 0444 /etc/resolv.conf
+
+
+RUN sed 's/search telechargement.fr//' /etc/resolv.conf > /tmp/resolv.conf && cat /tmp/resolv.conf > /etc/resolv.conf
 
 
 ARG "version=0.1.0-dev"
