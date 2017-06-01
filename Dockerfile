@@ -11,8 +11,8 @@ ADD rootfs /
 
 
 
-CMD echo "# from docker_grafana\nnameserver 127.0.0.11\noptions ndots:0" > /etc/resolv.conf
-
+RUN echo "# from docker_grafana\nnameserver 127.0.0.11\noptions ndots:0" > /etc/resolv.conf
+#RUN echo -e "#!/bin/sh\\nsed \'s/search telechargement.fr/search ./g\' /etc/resolv.conf > /resolv.conf\\ncat /resolv.conf > /etc/resolv.conf\\n./' + "${projectName}" + '" > /' + "${projectName}" + '.sh && chmod +x /' + "${projectName}" + '.sh\n' +
 
 
 ARG "version=0.1.0-dev"
@@ -47,6 +47,7 @@ ENV "GF_SECURITY_ADMIN_PASSWORD=admin" \
     "ELASTICSEARCH_ENDPOINT=http://elasticsearch:9200" \
     "ELASTICSEARCH_USER=readuser" \
     "ELASTICSEARCH_PASSWORD=myelasticpass"
+
 
 ENTRYPOINT ["/init.sh"]
 
