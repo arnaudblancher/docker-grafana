@@ -13,7 +13,7 @@ ADD rootfs /
 
 RUN echo $'# from docker_grafana\n\
 nameserver 127.0.0.11\n\
-options ndots:0' > /etc/resolv.conf
+options ndots:0' > /root/resolv.conf
 
 
 ARG "version=0.1.0-dev"
