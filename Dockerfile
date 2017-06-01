@@ -4,6 +4,17 @@ RUN apt-get update && apt-get install -y curl
 
 ADD rootfs /
 
+#/etc/resolv.conf 
+# from docker_grafana
+#nameserver 127.0.0.11
+#options ndots:0
+
+
+
+CMD echo "# from docker_grafana\nnameserver 127.0.0.11\noptions ndots:0" > /etc/resolv.conf
+
+
+
 ARG "version=0.1.0-dev"
 ARG "build_date=unknown"
 ARG "commit_hash=unknown"
