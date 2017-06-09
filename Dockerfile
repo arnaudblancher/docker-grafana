@@ -1,6 +1,6 @@
 FROM grafana/grafana:4.1.1
 
-RUN apt-get update && apt-get install -y curl
+RUN apt-get update && apt-get install -y curl vim
 
 ADD rootfs /
 
